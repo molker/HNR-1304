@@ -1,6 +1,7 @@
 '''
 1/18/2019
 Activity 2 Borda Count Method Problem
+	Has now been upgaded to work for any size table
 '''
 # Create all the different arrays
 candidates = []
@@ -15,7 +16,7 @@ numRow = input()
 numCol = input()
 
 # Loops that will fill the arrays
-i = 65
+i = 65	# the ASCII value for A
 
 for x in range(numCan):
 	candidates.append(chr(i))
@@ -26,23 +27,18 @@ for x in range(numCol):
 	numVotes.append(input())
 
 for x in range(numRow):
-	weights.append(numRow - x)
-
-for x in range(numRow):
 	row = raw_input()
 	rows.append(row)
+	weights.append(numRow - x)
 
 # Calculate the scores for the candidates based on the rows
 for x in range(numRow):
 	for y in range(numCol):
-		if rows[x][y] == "A":
-			scores[0] += numVotes[y] * weights[x]
-		if rows[x][y] == "B":
-			scores[1] += numVotes[y] * weights[x]
-		if rows[x][y] == "C":
-			scores[2] += numVotes[y] * weights[x]
-		if rows[x][y] == "D":
-			scores[3] += numVotes[y] * weights[x]
+		for z in range(numCan):
+			if rows[x][y] == candidates[z]:
+				scores[z] += numVotes[y] * weights[x]
+			elif rows[x][y] == "#":
+				scores[z] += 0
 
 # Print out the scores
 for x in range(numCan):
