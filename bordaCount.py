@@ -31,7 +31,7 @@ for x in range(len(rows)):
 		for c in candidates:
 			if rows[x][y] == c: 
 				diff = False
-		if diff == True:
+		if diff == True && rows[x][y] != "#":
 			candidates.append(rows[x][y])
 			scores.append(0)
 
