@@ -12,4 +12,5 @@
 		A: 209
 		B: 247
 		C: 163
+		B Wins with 247 points
 		```

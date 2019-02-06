@@ -41,7 +41,11 @@ for x in range(numRow):
 			elif rows[x][y] == "#":
 				scores[z] += 0
 
+win = max(scores)
 # Print out the scores
 for x in range(numCan):
-	print candidates[x] + ": " + str(scores[x])  
+	if scores[x] == win:
+		winc = candidates[x]
+	print candidates[x] + ": " + str(scores[x]) 
+print winc + " Wins with " + str(win) + " points"
 
