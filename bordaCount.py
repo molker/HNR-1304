@@ -11,16 +11,9 @@ weights = []
 rows = []
 
 # Get input describing the preference schedule 
-numCan = input()
 numRow = input()
 
 # Loops that will fill the arrays
-i = 65	# the ASCII value for A
-
-for x in range(numCan):
-	candidates.append(chr(i))
-	scores.append(0)
-	i = i + 1
 
 numVotes = raw_input()
 numVotes = numVotes.split(",")
@@ -32,10 +25,20 @@ for x in range(numRow):
 	rows.append(row)
 	weights.append(numRow - x)
 
+for x in range(len(rows)):
+	for y in range(len(rows[x])):
+		diff = True
+		for c in candidates:
+			if rows[x][y] == c: 
+				diff = False
+		if diff == True:
+			candidates.append(rows[x][y])
+			scores.append(0)
+
 # Calculate the scores for the candidates based on the rows
 for x in range(numRow):
 	for y in range(len(rows[x])):
-		for z in range(numCan):
+		for z in range(len(candidates)):
 			if rows[x][y] == candidates[z]:
 				scores[z] += numVotes[y] * weights[x]
 			elif rows[x][y] == "#":
@@ -43,7 +46,7 @@ for x in range(numRow):
 
 win = max(scores)
 # Print out the scores
-for x in range(numCan):
+for x in range(len(candidates)):
 	if scores[x] == win:
 		winc = candidates[x]
 	print candidates[x] + ": " + str(scores[x]) 
