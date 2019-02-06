@@ -5,10 +5,10 @@ Activity 2 Borda Count Method Problem
 '''
 # Create all the different arrays
 candidates = []
-scores = []
 numVotes = []
-weights = []
 rows = []
+scores = []
+weights = []
 
 # Get input describing the preference schedule 
 numRow = input()
