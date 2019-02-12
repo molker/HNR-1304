@@ -13,3 +13,13 @@
 		C: 163
 		B Wins with 247 points
 		```
+2. pairwise.py
+	* The Pairwise Comparison method invovles putting every candidate in a head-to-head matchup to see who is able to win the most head-to-head matches. That candidate becomes the winner. 
+	* To use effectively, the parameters should be input in this order (I'd recommend using an input file and using I/O Redirection):
+		1. Number of Rows in the Preference Table
+		2. Number of Votes from left to right of the table separated by a comma (no spaces)
+		3+. Each Row (i.e. "ABCD")
+	* If you've input everything correctly, your output should look something like this (output will vary from case to case depending on number of candidates):
+		```bash
+		A Wins with 2 points
+		```

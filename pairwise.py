@@ -1,14 +1,29 @@
 '''
-1/18/2019
-Activity 2 Borda Count Method Problem
-	Has now been upgaded to work for any size table
+2/6/2019
+Pairwise Voting Method
 '''
+#function for pairwise comprison 
+def pairwise(a, b, rows, numVotes):
+	pairscore = [0, 0]
+	for x in range(len(rows[0])):
+		for y in range(len(rows)):
+			if rows[y][x] == a:
+				pairscore[0] += numVotes[x]
+				break
+			elif rows[y][x] == b:
+				pairscore[1] += numVotes[x]
+				break
+	if pairscore[0] > pairscore[1]:
+		return a
+	else:
+		return b
+
+
 # Create all the different arrays
 candidates = []
 numVotes = []
 rows = []
 scores = []
-weights = []
 
 # Get input describing the preference schedule 
 numRow = input()
@@ -23,7 +38,6 @@ for n in range(len(numVotes)):
 for x in range(numRow):
 	row = raw_input()
 	rows.append(row)
-	weights.append(numRow - x)
 
 for x in range(len(rows)):
 	for y in range(len(rows[x])):
@@ -35,20 +49,23 @@ for x in range(len(rows)):
 			candidates.append(rows[x][y])
 			scores.append(0)
 
-# Calculate the scores for the candidates based on the rows
-for x in range(numRow):
-	for y in range(len(rows[x])):
-		for z in range(len(candidates)):
-			if rows[x][y] == candidates[z]:
-				scores[z] += numVotes[y] * weights[x]
-			elif rows[x][y] == "#":
-				scores[z] += 0
+# Put each candidate against each other
+compared = []
+for x in candidates:
+	for y in candidates:
+		if x != y:
+			for z in compared:
+				if sorted(str(x+y)) == z:
+					break
+			else:
+				pwin = pairwise(x,y,rows,numVotes)
+				compared.append(sorted(str(x+y)))
+				scores[ord(pwin)-65] += 1
 
 win = max(scores)
 # Print out the scores
 for x in range(len(candidates)):
 	if scores[x] == win:
 		winc = candidates[x]
-	print candidates[x] + ": " + str(scores[x]) 
 print winc + " Wins with " + str(win) + " points"
 
