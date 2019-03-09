@@ -23,7 +23,7 @@ for n in range(len(numVotes)):
 for x in range(numRow):
 	row = raw_input()
 	rows.append(row)
-	weights.append(numRow - x)
+	weights.append(numRow - x -1)
 
 for x in range(len(rows)):
 	for y in range(len(rows[x])):

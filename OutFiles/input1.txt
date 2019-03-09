@@ -1,0 +1,10 @@
+pairwise.py
+E Wins with 3 points
+ 
+bordaCount.py
+A: 98
+B: 92
+C: 89
+D: 69
+E: 102
+E Wins with 102 points

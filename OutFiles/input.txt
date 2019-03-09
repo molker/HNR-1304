@@ -1,0 +1,9 @@
+pairwise.py
+D Wins with 3 points
+ 
+bordaCount.py
+A: 127
+B: 93
+C: 191
+D: 189
+C Wins with 191 points
