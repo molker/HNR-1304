@@ -21,6 +21,7 @@ def instant(a,b, rows, numVotes):
 def checkMajority(rows, numVotes, candidates):
 	fpVotes = []
 	total = 0
+	global majority
 	for x in range(len(candidates)):
 		fpVotes.append(0)
 	for x in range(len(numVotes)):
@@ -37,11 +38,14 @@ def checkMajority(rows, numVotes, candidates):
 	for x in range(len(fpVotes)):
 		check = float(fpVotes[x]) / float(total)
 		if check > 0.5:
+			majority = True
 			return x
 	return -1
 
 def checkFP(rows, numVotes, candidates):
 	fpVotes = []
+	count = 0
+	global top3
 	for x in range(len(candidates)):
 		fpVotes.append(0)
 	for x in range(len(numVotes)):
@@ -56,9 +60,15 @@ def checkFP(rows, numVotes, candidates):
 	for x in range(len(fpVotes)):
 		if fpVotes[x] == 0:
 			fpVotes[x] = "#"
-	print fpVotes
+	# print fpVotes
 	lose = min(fpVotes)
-	print lose
+	# print lose
+	for x in fpVotes:
+		if x != "#":
+			count += 1
+	if count < 4:
+		print "top3"
+		top3 = True
 	for x in range(len(candidates)):
 		if fpVotes[x] == lose:
 			result = candidates[x]
@@ -66,11 +76,16 @@ def checkFP(rows, numVotes, candidates):
 
 def dump(rows, numVotes):
 	for x in range(len(numVotes)):
+		blank = 0
 		result = ""
 		result += numVotes[x] + " "
 		for y in range(len(rows)):
-			result += rows[y][x] + " "
-		print result + "\n"
+			if rows[y][x] == "#":
+				blank += 1
+			else: 
+				result += rows[y][x] + " "	
+		if blank != 3:
+			print result + "\n"
 
 # Create all the different arrays
 candidates = []
@@ -105,8 +120,9 @@ for x in range(len(rows)):
 		if diff == True and rows[x][y] != "#":
 			candidates.append(rows[x][y])
 			scores.append(0)
-
-while checkMajority(rows, numVotes, candidates) == -1:
+top3 = False
+majority = False
+while checkMajority(rows, numVotes, candidates) == -1 and top3 == False:
 	losec = checkFP(rows, numVotes, candidates)
 	for x in range(len(rows)):
 		for y in range(len(rows[x])):
@@ -114,7 +130,14 @@ while checkMajority(rows, numVotes, candidates) == -1:
 				tmp = list(rows[x])
 				tmp[y] = "#"
 				rows[x] = "".join(tmp)
-
-win = candidates[checkMajority(rows, numVotes, candidates)]
-print win + " Wins"
-
+if top3 == True and majority == True:
+	win = candidates[checkMajority(rows, numVotes, candidates)]
+	# print candidates
+	print win + " Wins"
+	# dump(rows, numVotes)
+elif majority == True:
+	win = candidates[checkMajority(rows, numVotes, candidates)]
+	# print candidates
+	print win + " Wins"
+elif top3 == True: 
+	dump(rows, numVotes)

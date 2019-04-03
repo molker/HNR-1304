@@ -54,8 +54,9 @@ int main(){
 		}
 	}
 	format(voteOrder, numBalSpot);
+	format(voteOrder, numBalSpot);
 	quickSort(voteOrder, 0, voteOrder.size() );
-	//dump(voteOrder);
+	dump(voteOrder);
 	return 0;
 }
 
