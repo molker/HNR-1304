@@ -67,7 +67,6 @@ def checkFP(rows, numVotes, candidates):
 		if x != "#":
 			count += 1
 	if count < 4:
-		print "top3"
 		top3 = True
 	for x in range(len(candidates)):
 		if fpVotes[x] == lose:
@@ -130,14 +129,12 @@ while checkMajority(rows, numVotes, candidates) == -1 and top3 == False:
 				tmp = list(rows[x])
 				tmp[y] = "#"
 				rows[x] = "".join(tmp)
-if top3 == True and majority == True:
+if majority == True:
+	print "Win by Majority:"
 	win = candidates[checkMajority(rows, numVotes, candidates)]
 	# print candidates
 	print win + " Wins"
 	# dump(rows, numVotes)
-elif majority == True:
-	win = candidates[checkMajority(rows, numVotes, candidates)]
-	# print candidates
-	print win + " Wins"
 elif top3 == True: 
+	print "Top 3 Preference Table"
 	dump(rows, numVotes)

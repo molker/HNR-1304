@@ -43,6 +43,7 @@ testAnswers()
 				echo "$1" >> "../OutFiles/$file"
 				python $1 < "../TestFiles/$file" >> "../OutFiles/$file"
 			else
+				echo $file
 				echo "$1" > "../OutFiles/$file"
 				python $1 < "../TestFiles/$file" >> "../OutFiles/$file"
 			fi
@@ -67,6 +68,9 @@ case "$1" in
 		;;
 	borda) 
 		testAnswers bordaCount.py 
+		;;
+	irv)
+		testAnswers instantRV.py
 		;;
 	all) 
 		testAnswers pairwise.py 
