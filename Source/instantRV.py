@@ -2,22 +2,17 @@
 3/8/2019
 Instant Runoff Voting Method
 '''
-#function for pairwise comprison 
-def instant(a,b, rows, numVotes):
-	pairscore = [0, 0]
-	for x in range(len(rows[0])):
-		for y in range(len(rows)):
-			if rows[y][x] == a:
-				pairscore[0] += int(numVotes[x])
-				break
-			elif rows[y][x] == b:
-				pairscore[1] += int(numVotes[x])
-				break
-	if pairscore[0] > pairscore[1]:
-		return a
-	else:
-		return b
 
+'''
+function: checkMajority
+parameters:
+	rows - every row of the preference table votes
+	numVotes - the corresponding votes to the position in the table
+	candidates - a list of candidates 
+result:
+	will return either the candidate with the majority vote or a -1 to 
+	signify nobody has a majority yet
+'''
 def checkMajority(rows, numVotes, candidates):
 	fpVotes = []
 	total = 0
@@ -42,6 +37,16 @@ def checkMajority(rows, numVotes, candidates):
 			return x
 	return -1
 
+'''
+function: checkFP 
+parameters:
+	rows - every row of the preference table votes
+	numVotes - the corresponding votes to the position in the table
+	candidates - a list of candidates 
+result:
+	will return the candidate who currently has the least first place votes
+	so the program can remove them to continue the instant runoff
+'''
 def checkFP(rows, numVotes, candidates):
 	fpVotes = []
 	count = 0
@@ -60,9 +65,7 @@ def checkFP(rows, numVotes, candidates):
 	for x in range(len(fpVotes)):
 		if fpVotes[x] == 0:
 			fpVotes[x] = "#"
-	# print fpVotes
 	lose = min(fpVotes)
-	# print lose
 	for x in fpVotes:
 		if x != "#":
 			count += 1
@@ -73,6 +76,14 @@ def checkFP(rows, numVotes, candidates):
 			result = candidates[x]
 	return result
 
+'''
+function: dump
+parameters:
+	rows - every row of the preference table votes
+	numVotes - the corresponding votes to the position in the table
+result:
+	prints out the preference schedule in the same format as how it was input
+'''
 def dump(rows, numVotes):
 	for x in range(len(numVotes)):
 		blank = 0
@@ -90,26 +101,29 @@ def dump(rows, numVotes):
 candidates = []
 numVotes = []
 rows = []
-scores = []
 
+# reading in the input
 while True:
 	try:
 		line = raw_input()
 		line = line.split(" ")
 		vote = line[0]
 		row = line[1]
+		#add blanks for ballots with less than 3 candidates listed
 		if len(row) < 3:
 			for x in range(3 - len(row)):
 				row += "#"
 		numVotes.append(vote)
+		#make sure the rows have room for each ballot before adding them
 		if len(rows) < len(row):
 			for x in range(len(row)-len(rows)):
 				rows.append("");
 		for x in range(len(row)):
 			rows[x] += row[x]
+	#stop when end of file is found
 	except EOFError:
 		break
-
+#makes the candidate list 
 for x in range(len(rows)):
 	for y in range(len(rows[x])):
 		diff = True
@@ -118,9 +132,10 @@ for x in range(len(rows)):
 				diff = False
 		if diff == True and rows[x][y] != "#":
 			candidates.append(rows[x][y])
-			scores.append(0)
+#"globals" used in the functions as flags
 top3 = False
 majority = False
+#while loop for doing the IRV method
 while checkMajority(rows, numVotes, candidates) == -1 and top3 == False:
 	losec = checkFP(rows, numVotes, candidates)
 	for x in range(len(rows)):
@@ -129,12 +144,11 @@ while checkMajority(rows, numVotes, candidates) == -1 and top3 == False:
 				tmp = list(rows[x])
 				tmp[y] = "#"
 				rows[x] = "".join(tmp)
+#Checks when flag is set for the result to print
 if majority == True:
 	print "Win by Majority:"
 	win = candidates[checkMajority(rows, numVotes, candidates)]
-	# print candidates
 	print win + " Wins"
-	# dump(rows, numVotes)
 elif top3 == True: 
 	print "Top 3 Preference Table"
 	dump(rows, numVotes)
