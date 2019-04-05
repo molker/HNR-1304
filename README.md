@@ -19,6 +19,7 @@
 ### dataParse.cpp
 * This program was made to take in real world data specifically for the research project involving IRV elections. It is meant to take out all duplicate data becuase there are times where someone will vote for "AAA" which is equivalent to an "A" vote
 * The output of this program is formatted the same way, just with more condensed and easier to use data. 
+* To improve efficiency, a quicksort was used to sort all the ballots and a [hash function](https://www.geeksforgeeks.org/remove-duplicates-from-a-given-string/) from GeeksForGeeks to determine duplicates in ballots was used. 
 ## Other Programs
 ### bordaCount.py
 * The Borda Count method applies weights to votes presented on a preference schedule. The program has been modified to allow any sized preference schedule with any amount of candidates. 
