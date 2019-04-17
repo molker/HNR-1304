@@ -44,3 +44,12 @@
 	```bash
 	A Wins with 2 points
 	```
+### hamiltonMeth.py
+* The [largest remainder method](https://en.wikipedia.org/wiki/Largest_remainder_method) (also known as Hare–Niemeyer method, Hamilton method or as Vinton's method) is one way of allocating seats proportionally for representative assemblies with party list voting systems. It contrasts with various divisor methods.
+* To use effectively, the parameters should be input in this order (I'd recommend using an input file and using I/O Redirection):
+	* Each State's populations
+* If you've input everything correctly, your output should look something like this (output will vary from case to case depending on number of candidates):
+	```bash
+	[1.0, 3.0, 4.0, 2.0, 6.0]
+	16 Seats
+	```

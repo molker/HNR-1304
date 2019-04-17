@@ -14,13 +14,13 @@ def maxFrac():
 		stringSQ.append(str(x))
 	for y in stringSQ:
 		split = y.split(".")
-		print split[1][0:4]
-		decimals.append(split[1][0:4])
+		decimals.append(int(split[1][0:4]))
 	m = max(decimals)
 	for z in range(len(decimals)):
 		if m == decimals[z]:
 			mi = z
-	return z
+			break
+	return mi
 
 def hamMethod(seatnum):
 	global population
@@ -35,18 +35,14 @@ def hamMethod(seatnum):
 	for x in range(len(sq)):
 		seats.append(math.floor(sq[x]))
 
+	cnt = 0
 	while(sum(seats) != seatnum):
 		rnd = maxFrac()
-		seats[x] = seats[x] + 1
-		sq[x] = seats[x]
+		seats[rnd] = seats[rnd] + 1
+		sq[rnd] = seats[rnd]
+		cnt += 1
 	print seats
-	print sum(seats)
-
-
-
-# def jeffMethod(seatnum):
-
-
+	print str(sum(seats)) + " seats"
 
 tmptotal = 0
 population = []
@@ -65,9 +61,3 @@ while True:
 total = sum(population)
 
 hamMethod(25)
-# for x in population:
-# 	tmp = float(x/total)
-# 	print '{:.6}'.format(x/(1000))
-# 	seats.append(math.ceil(x/(1100)))
-# print seats
-# print sum(seats)
