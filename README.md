@@ -45,7 +45,7 @@
 	A Wins with 2 points
 	```
 ### apportionment.py
-* Hamilton;s Method: The [largest remainder method](https://en.wikipedia.org/wiki/Largest_remainder_method) (also known as Hare–Niemeyer method, Hamilton method or as Vinton's method) is one way of allocating seats proportionally for representative assemblies with party list voting systems. It contrasts with various divisor methods.
+* [Hamilton's Method]((https://en.wikipedia.org/wiki/Largest_remainder_method): The largest remainder method (also known as Hare–Niemeyer method, Hamilton method or as Vinton's method) is one way of allocating seats proportionally for representative assemblies with party list voting systems. It contrasts with various divisor methods.
 * [Hill's Method](https://en.wikipedia.org/wiki/Huntington%E2%80%93Hill_method): assigns seats by finding a modified divisor D such that each constituency's priority quotient (its population divided by D), using the geometric mean of the lower and upper quota for the divisor, yields the correct number of seats that minimizes the percentage differences in the size of subconstituencies.
 * To use effectively, the parameters should be input in this order (I'd recommend using an input file and using I/O Redirection):
 	* Each State's populations
