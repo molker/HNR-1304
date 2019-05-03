@@ -44,7 +44,30 @@ def hamMethod(seatnum):
 	print seats
 	print str(sum(seats)) + " seats"
 
-tmptotal = 0
+def hillsMethod(sd):
+	global population
+	global seats
+	global sq
+	geo = []
+
+	for x in population:
+		sq.append(x/sd)
+
+	for x in sq:
+		geo.append(math.sqrt(math.ceil(x)*math.floor(x)))
+
+	for x in range(len(sq)):
+		seats.append(0)
+		if sq[x] < geo[x]:
+			seats[x] = math.floor(sq[x])
+		else:
+			seats[x] = math.ceil(sq[x])
+
+	print seats
+	print str(sum(seats)) + " seats"
+
+
+ 
 population = []
 seats = []
 sq = []
@@ -60,4 +83,15 @@ while True:
 
 total = sum(population)
 
-hamMethod(25)
+hillsMethod(139)
+# SD 37084
+# jeff = []
+# div = 34500
+# for x in population:
+# 	jeff.append(math.floor(x/div))
+# print "Jefferson's Method"
+# print jeff
+# print sum(jeff)
+
+# print "Hamilton's Method"
+# hamMethod(105)
